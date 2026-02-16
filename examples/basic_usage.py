@@ -16,9 +16,9 @@ def main() -> None:
         metadata_tasks=[
             MetadataTaskConfig(
                 name="item_generation",
-                prompt="Tag each page with a common core standard code if applicable grade 6 math.",
+                prompt="Tag each page with the dominant language.",
                 output_schema={
-                    "standard_code": "string",
+                    "language": "string",
                     "reason": "string",
                 },
                 target="page",
@@ -27,12 +27,10 @@ def main() -> None:
     )
 
     parser = DocParse(config)
-    for chunk in parser.parse_pdf_chunks("sample_10.pdf"):
+    for chunk in parser.parse_pdf_chunks("sample.pdf"):
         # immediately available
-        print("============================================= ")
         print(chunk.markdown)
         print(chunk.metadata)
-        print("=============================================")
 
 if __name__ == "__main__":
     main()
